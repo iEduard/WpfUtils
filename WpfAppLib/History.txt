@@ -1,0 +1,44 @@
+﻿********************************************************************************
+Version 1.5		31.12.2019
+
+-Added an cunstructor for the updateer. All applications need to pass through the own application name if the own application 
+	is also set as an updatable object. Since these running application is not able to be switched during running.
+-Added an state bar message after downloading
+
+********************************************************************************
+Version 1.4		07.05.2019
+
+-Changed the used .Net version to V4.0
+
+********************************************************************************
+Version 1.3		06.03.2019
+
+#Updater
+-Added input string for the local path. If the dll will be bind to an executable the method previously used will fail
+-Fixed the update check mechanism. Some newer applications would be downgraded in some cases.
+
+********************************************************************************
+Version 1.2		21.12.2018 
+
+#Updater
+-Added the statusbar to the ui
+-Changed the information of the updatable objects
+	-Removed the Percentage of the Download
+	-Added the Version numbers of the installed and remote objects
+-Changed the header of the updateable objects
+
+#Infodialog
+-Added the vertical scrollbar for the content
+
+********************************************************************************
+Version 1.1		05.12.2018 
+-Updated the "Updater"
+-Shortened the path for the UI local and remote path
+-Auto Sized the updater windwo to the content
+
+********************************************************************************
+Version 1.0		28.11.2018 
+-Created this lib
+
+********************************************************************************
+

@@ -1,0 +1,60 @@
+﻿<Window x:Class="WpfAppLib.Updater.UpdaterView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfAppLib"
+        mc:Ignorable="d"
+        Title="Updater" Height="300" Width="300"
+        SizeToContent="Width">
+    <Grid>
+        <DockPanel>
+            <StatusBar DockPanel.Dock="Bottom"
+                       x:Name="StateBar" 
+                       Margin="0,0,0,0"
+                       Height="20"
+                       Background="{Binding StatusBarBackground}">
+                <Border x:Name="container2"
+                        Grid.Row="1" Grid.Column="1"
+                        VerticalAlignment="Stretch" 
+                        HorizontalAlignment="Stretch" 
+                        Padding="0" 
+                        Margin="0" 
+                        BorderThickness="0">
+                    <Label  Name ="StatusLabelText"
+                            Content="{Binding StatusBarText}"
+                            FontWeight="Normal"
+                            HorizontalAlignment="Left"
+                            Padding="0" Margin="0"
+                            TextBlock.LineHeight="{Binding ElementName=container2,Path=ActualHeight}"
+                            TextBlock.LineStackingStrategy="BlockLineHeight"
+                            FontSize= "12"/>
+                </Border>
+            </StatusBar>
+            <StackPanel DockPanel.Dock="Bottom"
+                        Orientation="Horizontal"
+                        HorizontalAlignment="Right"
+                        Margin="0,0,0,5">
+                <Button Name="CheckUpdatesButton"                      
+                        Click="CheckUpdatesButton_Click">Auf Updates prüfen</Button>
+                <Button Name="UpdateButton"
+                        Margin="5,0,0,0"
+                        Click="UpdateButton_Click">Update</Button>
+                <Button Name="CancelButton"
+                        Margin="5,0,5,0"
+                        Click="CancelButton_Click">Abbrechen</Button>
+            </StackPanel>
+
+            <DataGrid   DockPanel.Dock="Top"
+                        x:Name="JobsDataGrid" 
+                        ItemsSource="{Binding UpdatableObjects}"
+                        AutoGenerateColumns="True"
+                        CanUserSortColumns="False"
+                        Margin="5,10,5,5"
+                        HeadersVisibility="Column"
+                        GridLinesVisibility="Horizontal"
+                        AutoGeneratingColumn="JobsDataGrid_AutoGeneratingColumn">
+            </DataGrid>
+        </DockPanel>
+    </Grid>
+</Window>

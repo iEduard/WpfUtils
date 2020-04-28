@@ -1,0 +1,57 @@
+﻿<Window x:Class="WpfAppLib.Infodialog.InfoDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfAppLib"
+        mc:Ignorable="d"
+        Title="InfoDialog" Height="350" Width="500">
+    
+    <Grid>
+        <StackPanel Grid.ColumnSpan="3">
+        <StackPanel Margin="10,10,0,0" Orientation="Horizontal" HorizontalAlignment="Left">
+            <Label Content="Version: " 
+                       Padding="0"/>
+            <Label Name="lVersion" 
+                       Margin="3,0,0,0" 
+                       Content="1.0.0.212321" 
+                       Padding="0"/>
+        </StackPanel>
+        <StackPanel Margin="10,0,0,0" Orientation="Horizontal" HorizontalAlignment="Left" >
+            <Label Content="Firma: " 
+                       Padding="0"/>
+            <Label Name="lCompany" 
+                       Margin="14,0,0,0" 
+                       Content="SchwEdu GmbH" 
+                       Padding="0"/>
+        </StackPanel>
+        <StackPanel Margin="10,0,0,0" Orientation="Horizontal" HorizontalAlignment="Left">
+            <Label Content="Author: " 
+                       Padding="0"/>
+            <Label Name="lAuthor" 
+                       Margin="7,0,0,0" 
+                       Content="Eduard Schmidt" 
+                       Padding="0"/>
+        </StackPanel>
+        <StackPanel Margin="10,0,0,0" Orientation="Horizontal" HorizontalAlignment="Left">
+                <Label Content="E-Mail: " 
+                       Padding="0"/>
+                <Label Name="lemailAdress"
+                       Margin="10,0,0,0"
+                       Padding="0"
+                       Foreground="Blue"
+                       Content="Test" MouseLeftButtonUp="emailLink_Click"
+                       />
+        </StackPanel>
+            <Label Content="Info:" 
+                   Margin="10,12,0,0" 
+                   Padding="0"/>
+        </StackPanel>
+    <TextBox Name="tbVersionHistory"  
+             TextWrapping="Wrap" 
+             Margin="10,106,10,45" 
+             VerticalScrollBarVisibility="Auto"/>
+    <Button x:Name="bClose" Content="Schließen" Margin="0,0,10,10" Click="bClose_Click" HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
+
+    </Grid>
+</Window>
