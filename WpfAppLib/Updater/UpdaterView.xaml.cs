@@ -26,6 +26,13 @@ namespace WpfAppLib.Updater
 
         #endregion 
 
+
+        /// <summary>
+        /// Update object with settings file and local path
+        /// </summary>
+        /// <param name="position">position where the pop up window should be displayed</param>
+        /// <param name="settingsPath">path of the update configuration file</param>
+        /// <param name="localPath">local path of the application</param>
         public UpdaterView(Point position, string settingsPath, string localPath)
         {
 
@@ -38,7 +45,7 @@ namespace WpfAppLib.Updater
         }
 
         /// <summary>
-        /// Updater constructor
+        /// Update object with path to settings and own application name to update currently running application as well
         /// </summary>
         /// <param name="position">position where the pop up window should be displayed</param>
         /// <param name="settingsPath">path of the update configuration file</param>
@@ -55,6 +62,25 @@ namespace WpfAppLib.Updater
 
         }
 
+
+        /// <summary>
+        /// Update object with settings. Used if the running application is the only application to be updated without an settings file
+        /// </summary>
+        /// <param name="position">position where the pop up window should be displayed</param>
+        /// <param name="updaterSettings"></param>
+        public UpdaterView(Point position, updaterSettingsData updaterSettings)
+        {
+
+            this.windowStartPosistion = position;
+
+            InitializeComponent();
+            viewModel = new UpdaterViewModel(updaterSettings);
+            this.DataContext = viewModel;
+
+        }
+
+
+        //updaterSettingsData
 
 
         #region UI events

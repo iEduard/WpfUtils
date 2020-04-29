@@ -55,7 +55,7 @@ namespace WpfAppLib.Updater
         #endregion
 
         /// <summary>
-        /// Constructor
+        /// Update view model with settings path to the updater settings file to update the requested applications
         /// </summary>
         /// <param name="settingsPath"></param>
         public UpdaterViewModel(string settingsPath, string localPath)
@@ -71,7 +71,7 @@ namespace WpfAppLib.Updater
         }
 
         /// <summary>
-        /// Constructor 
+        /// Updater view model with running application to be updated and path for the updater settings
         /// </summary>
         /// <param name="settingsPath">own settings path of the updater</param>
         /// <param name="localPath">local path of the running application</param>
@@ -86,6 +86,24 @@ namespace WpfAppLib.Updater
 
             updater = new Updater(settingsPath, localPath, UpdatableObjects, applicationName);
             updater.UpdateStateChanged += UpdaterStatusUpdate;
+        }
+
+
+        /// <summary>
+        /// Updater view model with updater settings directly handling over
+        /// </summary>
+        /// <param name="updaterSettings">Updater settings with all needed information to update the currently running application</param>
+        public UpdaterViewModel(updaterSettingsData updaterSettings)
+        {
+            // Create a new observable collection
+            UpdatableObjects = new ObservableCollection<UpdateObject>();
+
+            StatusBarBackground = Brushes.Orange;
+            StatusBarText = "Checking for available updates";
+
+            updater = new Updater(updaterSettings, UpdatableObjects);
+            updater.UpdateStateChanged += UpdaterStatusUpdate;
+
         }
 
 

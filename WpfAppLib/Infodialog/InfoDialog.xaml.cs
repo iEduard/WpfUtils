@@ -17,9 +17,17 @@ namespace WpfAppLib.Infodialog
 
         private string VersionNumber;
 
+
         /// <summary>
-        /// Info Dialog Constructor
+        /// Create a new infodialog object
         /// </summary>
+        /// <param name="position">Postion of the infodialog to be shown first</param>
+        /// <param name="versionNumber">Version number to be shown</param>
+        /// <param name="historyText">History tet in an scrollable textbox </param>
+        /// <param name="companyName">Company name to be shown</param>
+        /// <param name="author">Author of the programm to be shown</param>
+        /// <param name="eMailAdress">Mail address to be shown</param>
+        /// <param name="language">currently unuesed</param>
         public InfoDialog(Point position, string versionNumber, string historyText, string companyName, string author, string eMailAdress, string language)
         {
             windowStartPosistion = position;
@@ -38,12 +46,7 @@ namespace WpfAppLib.Infodialog
 
             // Set the Textbox to read only
             tbVersionHistory.IsReadOnly = true;
-
-
         }
-
-
-
 
 
         /// <summary>

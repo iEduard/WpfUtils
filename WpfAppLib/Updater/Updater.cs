@@ -97,6 +97,21 @@ namespace WpfAppLib.Updater
                 UpdatableObjects.Add(new UpdateObject(_settings));
             }
 
+            // Check for Updates
+            getVersionsAsynch();
+        }
+
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="updaterSettings">Update application settings</param>
+        /// <param name="updatableObjects">collection of updatable files</param>
+        public Updater(updaterSettingsData updaterSettings, ObservableCollection<UpdateObject> updatableObjects)
+        {
+            this.OwnApplicationName = updaterSettings.appName;
+            this.UpdatableObjects = updatableObjects;
+
+            UpdatableObjects.Add(new UpdateObject(updaterSettings));
 
             // Check for Updates
             getVersionsAsynch();
@@ -137,8 +152,6 @@ namespace WpfAppLib.Updater
 
         #endregion
 
-
-
         #region get update 
 
         /// <summary>
@@ -159,19 +172,9 @@ namespace WpfAppLib.Updater
 
             foreach (UpdateObject _appEntry in this.UpdatableObjects)
             {
-                if (this.OwnApplicationName != "")
+                if (!_appEntry.performUpdate(this.OwnApplicationName))
                 {
-                    if (!_appEntry.performUpdate(this.OwnApplicationName))
-                    {
-                        _retVal = false;
-                    }
-                }
-                else
-                {
-                    if(!_appEntry.performUpdate())
-                    {
-                        _retVal = false;
-                    }
+                    _retVal = false;
                 }
             }
 

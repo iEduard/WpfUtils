@@ -282,80 +282,11 @@ namespace WpfAppLib.Updater
 
         }
 
-
         /// <summary>
-        /// 
+        /// Update the running application
         /// </summary>
-        /// <returns>TRUE = update performed with no Error // FALSE = Update throws at least one error</returns>
-        public bool performUpdate()
-        {
-            if (!this.IsSelectedToDownload)
-            {
-                return false;
-            }
-
-            Console.WriteLine("Performing Update for " + this.settings.appName + "...");
-
-            #region Update the execution File
-
-            // Check if the Destination Directory allready exists
-            // If not create it
-            if (!Directory.Exists(this.settings.appLocalPath))
-            {
-                Directory.CreateDirectory(this.settings.appLocalPath);
-            }
-
-
-            // Da wir den Instally selber nicht so einfach ersetzen können da er ja bereits läuft müssen wir ihm einen besonderen Namen geben mit dem versionszusatz
-            string _fileNameAddon = "";
-            bool _isInstally = this.settings.appName == "Instally";
-
-            if (_isInstally)
-            {
-                _fileNameAddon = this.settings.appFileName.Replace(".exe", "") + "_" + FileVersionInfo.GetVersionInfo(this.settings.appServerPath + this.settings.appFileName).FileVersion + ".exe";
-            }
-            else
-            {
-                _fileNameAddon = this.settings.appFileName;
-            }
-
-            // perform the update of the execution file
-            CopyMaster copyFiles = new CopyMaster();
-            copyFiles.copyFile(this.settings.appServerPath + this.settings.appFileName, this.settings.appLocalPath + _fileNameAddon, true);
-
-
-
-            #endregion
-
-            #region Update the settings File
-
-            // Check if the Destination Directory allready exists
-            // If not create it
-            if (!Directory.Exists(this.settings.settingsLocalPath))
-            {
-                Directory.CreateDirectory(this.settings.settingsLocalPath);
-            }
-
-            if (this.settings.settingsFileName != "")
-            {
-                // perform the update of the execution file               
-                copyFiles.copyFile(this.settings.settingsServerPath + this.settings.settingsFileName, this.settings.settingsLocalPath + this.settings.settingsFileName, true);
-            }
-
-            #endregion
-
-            Console.WriteLine("... Update done");
-
-            if (_isInstally)
-            {
-                Console.WriteLine("");
-                Console.WriteLine("--------ACHTUNG--------");
-                Console.WriteLine("Instally wurde aktualisiert auf dem Verzeichniss abgelegt. Bitte die Anwendung beenden und die alte anwendung löschen und die neue in instally umbennenn");
-                Console.WriteLine("");
-            }
-            return false;
-        }
-
+        /// <param name="applicationName"></param>
+        /// <returns></returns>
         public bool performUpdate(string applicationName)
         {
 
@@ -368,8 +299,6 @@ namespace WpfAppLib.Updater
 
             Console.WriteLine("Performing Update for " + this.settings.appName + "...");
 
-            #region Update the execution File
-
             // Check if the Destination Directory allready exists
             // If not create it
             if (!Directory.Exists(this.settings.appLocalPath))
@@ -380,9 +309,9 @@ namespace WpfAppLib.Updater
 
             // Da wir den Instally selber nicht so einfach ersetzen können da er ja bereits läuft müssen wir ihm einen besonderen Namen geben mit dem versionszusatz
             string _fileNameAddon = "";
-            bool _isInstally = this.settings.appName == applicationName;
+            bool _isRunningApplicatio = (this.settings.appName == applicationName) && (applicationName != "");
 
-            if (_isInstally)
+            if (_isRunningApplicatio)
             {
                 _fileNameAddon = this.settings.appFileName.Replace(".exe", "") + "_" + FileVersionInfo.GetVersionInfo(this.settings.appServerPath + this.settings.appFileName).FileVersion + ".exe";
             }
@@ -394,10 +323,6 @@ namespace WpfAppLib.Updater
             // perform the update of the execution file
             CopyMaster copyFiles = new CopyMaster();
             _retVal = copyFiles.copyFile(this.settings.appServerPath + this.settings.appFileName, this.settings.appLocalPath + _fileNameAddon, true);
-
-
-
-            #endregion
 
             #region Update the settings File
 
@@ -420,7 +345,7 @@ namespace WpfAppLib.Updater
 
             Console.WriteLine("... Update done");
 
-            if (_isInstally)
+            if (_isRunningApplicatio)
             {
                 Console.WriteLine("");
                 Console.WriteLine("--------ACHTUNG--------");
