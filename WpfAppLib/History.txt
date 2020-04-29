@@ -1,4 +1,12 @@
 ﻿********************************************************************************
+Version 1.6		29.04.2020
+
+-Updated the updater to be allow construtors with settings directly delivered
+
+-Removed depricated code linked to old projects
+
+
+********************************************************************************
 Version 1.5		31.12.2019
 
 -Added an cunstructor for the updateer. All applications need to pass through the own application name if the own application 
