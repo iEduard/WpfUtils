@@ -100,5 +100,8 @@
   <ItemGroup>
     <EmbeddedResource Include="History.txt" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Updater\SettingsExample.xml" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Settings xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+  <app>
+    <name>Backup  Tool</name>
+    <appFileName>BackupThatThing.exe</appFileName>
+    <appLocalPath>EE_DATA\BACKUP\</appLocalPath>
+    <appServerPath>K:\Elektronik\Installs\Eduard Schmidt\Engmatec Beckhoff\BackupThatThing\bin\Release\</appServerPath>
+    <settingsFileName>_Settings.xml</settingsFileName>
+    <settingsLocalPath>EE_DATA\BACKUP\</settingsLocalPath>
+    <settingsServerPath>K:\Elektronik\Installs\Eduard Schmidt\Engmatec Beckhoff\BackupThatThing\bin\Release\</settingsServerPath>
+  </app>
+
+
+</Settings>
