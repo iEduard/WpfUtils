@@ -1,4 +1,4 @@
-﻿<Window x:Class="WpfAppLib.Updater.UpdaterView"
+﻿<Window x:Class="WpfAppLib.MultiUpdater.MultiUpdaterView"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -44,29 +44,17 @@
                         Margin="5,0,5,0"
                         Click="CancelButton_Click">Abbrechen</Button>
             </StackPanel>
-            <StackPanel DockPanel.Dock="Top"
-                        Orientation="Vertical">
-                <StackPanel Orientation="Horizontal">
-                    <Label Content="Local path: "/>
-                    <Label Content="{Binding UpdatableObject.LocalUrl}"/>
-                </StackPanel>
 
-                <StackPanel Orientation="Horizontal">
-                    <Label Content="Local version: "/>
-                    <Label Content="{Binding UpdatableObject.LocalVersion}"/>
-                </StackPanel>
-
-                <StackPanel Orientation="Horizontal">
-                    <Label Content="Remote path: "/>
-                    <Label Content="{Binding UpdatableObject.RemoteUrl}"/>
-                </StackPanel>
-
-                <StackPanel Orientation="Horizontal">
-                    <Label Content="Remote version: "/>
-                    <Label Content="{Binding UpdatableObject.RemoteVersion}"/>
-                </StackPanel>
-            </StackPanel>
-
+            <DataGrid   DockPanel.Dock="Top"
+                        x:Name="JobsDataGrid" 
+                        ItemsSource="{Binding UpdatableObjects}"
+                        AutoGenerateColumns="True"
+                        CanUserSortColumns="False"
+                        Margin="5,10,5,5"
+                        HeadersVisibility="Column"
+                        GridLinesVisibility="Horizontal"
+                        AutoGeneratingColumn="JobsDataGrid_AutoGeneratingColumn">
+            </DataGrid>
         </DockPanel>
     </Grid>
 </Window>

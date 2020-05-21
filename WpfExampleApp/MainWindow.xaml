@@ -10,6 +10,7 @@
         <StackPanel>
             <Button Name ="btInfo" Click="btInfo_Click">Info</Button>
             <Button Name ="btUpdater" Click="btUpdater_Click">Updater</Button>
+            <Button Name ="btMultiUpdater" Click="btMultiUpdater_Click">MultiUpdater</Button>
         </StackPanel>
 
 

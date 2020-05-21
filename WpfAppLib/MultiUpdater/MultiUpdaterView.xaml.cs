@@ -1,12 +1,12 @@
 ﻿using System.Windows;
 
 
-namespace WpfAppLib.Updater
+namespace WpfAppLib.MultiUpdater
 {
     /// <summary>
     /// Interaktionslogik für Updater.xaml
     /// </summary>
-    public partial class UpdaterView : Window
+    public partial class MultiUpdaterView : Window
     {
 
 
@@ -22,7 +22,7 @@ namespace WpfAppLib.Updater
         /// <summary>
         /// The viev model
         /// </summary>
-        private UpdaterViewModel viewModel;
+        private MultiUpdaterViewModel viewModel;
 
         #endregion 
 
@@ -33,13 +33,13 @@ namespace WpfAppLib.Updater
         /// <param name="position">position where the pop up window should be displayed</param>
         /// <param name="settingsPath">path of the update configuration file</param>
         /// <param name="localPath">local path of the application</param>
-        public UpdaterView(Point position, string settingsPath, string localPath)
+        public MultiUpdaterView(Point position, string settingsPath, string localPath)
         {
 
             this.windowStartPosistion = position;
 
             InitializeComponent();
-            viewModel = new UpdaterViewModel(settingsPath, localPath);
+            viewModel = new MultiUpdaterViewModel(settingsPath, localPath);
             this.DataContext = viewModel;
 
         }
@@ -51,13 +51,13 @@ namespace WpfAppLib.Updater
         /// <param name="settingsPath">path of the update configuration file</param>
         /// <param name="localPath">local path of the application</param>
         /// <param name="applicationName">name of the application called the lib. Only needed if this aopplication should also be updatable</param>
-        public UpdaterView(Point position, string settingsPath, string localPath, string applicationName)
+        public MultiUpdaterView(Point position, string settingsPath, string localPath, string applicationName)
         {
 
             this.windowStartPosistion = position;
 
             InitializeComponent();
-            viewModel = new UpdaterViewModel(settingsPath, localPath, applicationName);
+            viewModel = new MultiUpdaterViewModel(settingsPath, localPath, applicationName);
             this.DataContext = viewModel;
 
         }
@@ -68,16 +68,19 @@ namespace WpfAppLib.Updater
         /// </summary>
         /// <param name="position">position where the pop up window should be displayed</param>
         /// <param name="updaterSettings"></param>
-        public UpdaterView(Point position, updaterSettingsData updaterSettings)
+        public MultiUpdaterView(Point position, updaterSettingsData updaterSettings)
         {
 
             this.windowStartPosistion = position;
 
             InitializeComponent();
-            viewModel = new UpdaterViewModel(updaterSettings);
+            viewModel = new MultiUpdaterViewModel(updaterSettings);
             this.DataContext = viewModel;
 
         }
+
+
+        //updaterSettingsData
 
 
         #region UI events

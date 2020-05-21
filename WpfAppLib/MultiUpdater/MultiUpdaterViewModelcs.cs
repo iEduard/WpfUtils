@@ -4,14 +4,14 @@ using System.ComponentModel;
 using System.Windows;
 using System.Windows.Media;
 
-namespace WpfAppLib.Updater
+namespace WpfAppLib.MultiUpdater
 {
-    class UpdaterViewModel : INotifyPropertyChanged
+    class MultiUpdaterViewModel : INotifyPropertyChanged
     {
 
         #region local variables
 
-        private Updater updater;
+        private MultiUpdater updater;
         private string statusBarText;
         private Brush statusBarBackground;
 
@@ -19,11 +19,11 @@ namespace WpfAppLib.Updater
 
         #region public variables
 
-
         /// <summary>
-        /// Updatable object
+        /// Observable List for the Data Grid and the Simulation Interface.
         /// </summary>
-        public UpdateObject UpdatableObject;
+        public ObservableCollection<UpdateObject> UpdatableObjects { get; set; }
+
 
         /// <summary>
         /// Label content of ths statusbart
@@ -58,16 +58,16 @@ namespace WpfAppLib.Updater
         /// Update view model with settings path to the updater settings file to update the requested applications
         /// </summary>
         /// <param name="settingsPath"></param>
-        public UpdaterViewModel(string settingsPath, string localPath)
+        public MultiUpdaterViewModel(string settingsPath, string localPath)
         {
-            //// Create a new observable collection
-            //UpdatableObjects = new ObservableCollection<UpdateObject>();
+            // Create a new observable collection
+            UpdatableObjects = new ObservableCollection<UpdateObject>();
 
-            //StatusBarBackground = Brushes.Orange;
-            //StatusBarText = "Checking for available updates";
+            StatusBarBackground = Brushes.Orange;
+            StatusBarText = "Checking for available updates";
 
-            //updater = new Updater(settingsPath, localPath, UpdatableObjects);
-            //updater.UpdateStateChanged += UpdaterStatusUpdate;
+            updater = new MultiUpdater(settingsPath, localPath, UpdatableObjects);
+            updater.UpdateStateChanged += UpdaterStatusUpdate;
         }
 
         /// <summary>
@@ -76,16 +76,16 @@ namespace WpfAppLib.Updater
         /// <param name="settingsPath">own settings path of the updater</param>
         /// <param name="localPath">local path of the running application</param>
         /// <param name="applicationName">own application name</param>
-        public UpdaterViewModel(string settingsPath, string localPath, string applicationName)
+        public MultiUpdaterViewModel(string settingsPath, string localPath, string applicationName)
         {
-            //// Create a new observable collection
-            //UpdatableObjects = new ObservableCollection<UpdateObject>();
+            // Create a new observable collection
+            UpdatableObjects = new ObservableCollection<UpdateObject>();
 
-            //StatusBarBackground = Brushes.Orange;
-            //StatusBarText = "Checking for available updates";
+            StatusBarBackground = Brushes.Orange;
+            StatusBarText = "Checking for available updates";
 
-            //updater = new Updater(settingsPath, localPath, UpdatableObjects, applicationName);
-            //updater.UpdateStateChanged += UpdaterStatusUpdate;
+            updater = new MultiUpdater(settingsPath, localPath, UpdatableObjects, applicationName);
+            updater.UpdateStateChanged += UpdaterStatusUpdate;
         }
 
 
@@ -93,15 +93,15 @@ namespace WpfAppLib.Updater
         /// Updater view model with updater settings directly handling over
         /// </summary>
         /// <param name="updaterSettings">Updater settings with all needed information to update the currently running application</param>
-        public UpdaterViewModel(updaterSettingsData updaterSettings)
+        public MultiUpdaterViewModel(updaterSettingsData updaterSettings)
         {
             // Create a new observable collection
-            UpdatableObject = new UpdateObject(updaterSettings);
+            UpdatableObjects = new ObservableCollection<UpdateObject>();
 
             StatusBarBackground = Brushes.Orange;
             StatusBarText = "Checking for available updates";
 
-            updater = new Updater(UpdatableObject);
+            updater = new MultiUpdater(updaterSettings, UpdatableObjects);
             updater.UpdateStateChanged += UpdaterStatusUpdate;
 
         }

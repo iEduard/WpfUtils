@@ -48,12 +48,19 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MultiUpdater\Settings.cs" />
+    <Compile Include="MultiUpdater\UpdateObject.cs" />
+    <Compile Include="MultiUpdater\Updater.cs" />
     <Compile Include="Updater\Settings.cs" />
     <Compile Include="Updater\UpdateObject.cs" />
     <Compile Include="Updater\Updater.cs" />
+    <Compile Include="MultiUpdater\MultiUpdaterView.xaml.cs">
+      <DependentUpon>MultiUpdaterView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Updater\UpdaterView.xaml.cs">
       <DependentUpon>UpdaterView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MultiUpdater\MultiUpdaterViewModelcs.cs" />
     <Compile Include="Updater\UpdaterViewModelcs.cs" />
     <Compile Include="Version.cs" />
     <Page Include="Infodialog\InfoDialog.xaml">
@@ -63,6 +70,10 @@
     <Compile Include="Infodialog\InfoDialog.xaml.cs">
       <DependentUpon>InfoDialog.xaml</DependentUpon>
     </Compile>
+    <Page Include="MultiUpdater\MultiUpdaterView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Updater\UpdaterView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -102,6 +113,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Updater\SettingsExample.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="MultiUpdater\SettingsExample.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

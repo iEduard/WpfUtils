@@ -5,7 +5,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Text;
 
-namespace WpfAppLib.Updater
+namespace WpfAppLib.MultiUpdater
 {
     public class UpdateObject : INotifyPropertyChanged
     {
@@ -128,7 +128,7 @@ namespace WpfAppLib.Updater
         /// <param name="selection"></param>
         public UpdateObject(updaterSettingsData settings)
         {
-            this.settings = settings;          
+            this.settings = settings;
 
 
             // Init the States
@@ -137,6 +137,9 @@ namespace WpfAppLib.Updater
             this.downloadState = 0;
 
         }
+
+
+
 
         /// <summary>
         /// 
@@ -229,6 +232,7 @@ namespace WpfAppLib.Updater
             this.IsSelectedToDownload = retval;
             return retval;
         }
+
 
         /// <summary>
         /// 
@@ -350,62 +354,6 @@ namespace WpfAppLib.Updater
             }
             return _retVal;
         }
-
-        /// <summary>
-        /// Update the running application
-        /// </summary>
-        /// <returns></returns>
-        public bool performUpdate()
-        {
-
-            bool _retVal = false;
-
-            if (!this.IsSelectedToDownload)
-            {
-                return _retVal;
-            }
-
-            Console.WriteLine("Performing Update for " + this.settings.appName + "...");
-
-            // Check if the Destination Directory allready exists
-            // If not create it
-            if (!Directory.Exists(this.settings.appLocalPath))
-            {
-                Directory.CreateDirectory(this.settings.appLocalPath);
-            }
-
-
-            // Da wir den Instally selber nicht so einfach ersetzen können da er ja bereits läuft müssen wir ihm einen besonderen Namen geben mit dem versionszusatz
-            string _fileNameAddon = this.settings.appFileName.Replace(".exe", "") + "_" + FileVersionInfo.GetVersionInfo(this.settings.appServerPath + this.settings.appFileName).FileVersion + ".exe";
-
-            // perform the update of the execution file
-            CopyMaster copyFiles = new CopyMaster();
-            _retVal = copyFiles.copyFile(this.settings.appServerPath + this.settings.appFileName, this.settings.appLocalPath + _fileNameAddon, true);
-
-            #region Update the settings File
-
-            // Check if the Destination Directory allready exists
-            // If not create it
-            if (!Directory.Exists(this.settings.settingsLocalPath))
-            {
-                Directory.CreateDirectory(this.settings.settingsLocalPath);
-            }
-
-            if (this.settings.settingsFileName != "" && _retVal)
-            {
-                // perform the update of the execution file               
-                bool _var = copyFiles.copyFile(this.settings.settingsServerPath + this.settings.settingsFileName, this.settings.settingsLocalPath + this.settings.settingsFileName, true);
-            }
-
-
-
-            #endregion
-
-            Console.WriteLine("... Update done");
-
-            return _retVal;
-        }
-
 
         /// <summary>
         /// Function to shorten the path to visualize

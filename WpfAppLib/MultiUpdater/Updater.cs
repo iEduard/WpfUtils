@@ -2,10 +2,9 @@
 using System.Collections.ObjectModel;
 using System.Threading;
 
-namespace WpfAppLib.Updater
+namespace WpfAppLib.MultiUpdater
 {
     #region Events
-
     public class UpdateStateChangedEventArgs : EventArgs
     {
         /// <summary>
@@ -27,7 +26,7 @@ namespace WpfAppLib.Updater
     #endregion
 
 
-    class Updater
+    class MultiUpdater
     {
 
         #region private variables
@@ -53,7 +52,8 @@ namespace WpfAppLib.Updater
         /// <summary>
         /// Observable collection of updatable applications. This variable is binded with the UI
         /// </summary>
-        public UpdateObject UpdatableObject { get; set; }
+        public ObservableCollection<UpdateObject> UpdatableObjects { get; set; }
+
 
         #endregion
 
@@ -66,19 +66,19 @@ namespace WpfAppLib.Updater
         /// </summary>
         /// <param name="settingsPath"></param>
         /// <param name="updatableObjects"></param>
-        public Updater(string settingsPath, string localPath, UpdateObject updatableObject)
+        public MultiUpdater(string settingsPath, string localPath, ObservableCollection<UpdateObject> updatableObjects)
         {
 
-            //this.UpdatableObject = updatableObject;
+            this.UpdatableObjects = updatableObjects;
 
-            //foreach (var _settings in UpdaterSettings.load(settingsPath, localPath))
-            //{
-            //    UpdatableObjects.Add(new UpdateObject(_settings));
-            //}
+            foreach (var _settings in UpdaterSettings.load(settingsPath, localPath))
+            {
+                UpdatableObjects.Add(new UpdateObject(_settings));
+            }
 
 
-            //// Check for Updates
-            //getVersionsAsynch();
+            // Check for Updates
+            getVersionsAsynch();
         }
 
         /// <summary>
@@ -88,27 +88,31 @@ namespace WpfAppLib.Updater
         /// <param name="localPath">local file path</param>
         /// <param name="updatableObjects">collection of updatable files</param>
         /// <param name="applicationName">application name of the current running application</param>
-        public Updater(string settingsPath, string localPath, ObservableCollection<UpdateObject> updatableObjects, string applicationName)
+        public MultiUpdater(string settingsPath, string localPath, ObservableCollection<UpdateObject> updatableObjects, string applicationName)
         {
-            //this.OwnApplicationName = applicationName;
-            //this.UpdatableObjects = updatableObjects;
+            this.OwnApplicationName = applicationName;
+            this.UpdatableObjects = updatableObjects;
 
-            //foreach (var _settings in UpdaterSettings.load(settingsPath, localPath))
-            //{
-            //    UpdatableObjects.Add(new UpdateObject(_settings));
-            //}
+            foreach (var _settings in UpdaterSettings.load(settingsPath, localPath))
+            {
+                UpdatableObjects.Add(new UpdateObject(_settings));
+            }
 
-            //// Check for Updates
-            //getVersionsAsynch();
+            // Check for Updates
+            getVersionsAsynch();
         }
 
         /// <summary>
         /// Constructor
         /// </summary>
-        /// <param name="updatableObject">collection of updatable files</param>
-        public Updater(UpdateObject updatableObject)
+        /// <param name="updaterSettings">Update application settings</param>
+        /// <param name="updatableObjects">collection of updatable files</param>
+        public MultiUpdater(updaterSettingsData updaterSettings, ObservableCollection<UpdateObject> updatableObjects)
         {
-            this.UpdatableObject = updatableObject;
+            this.OwnApplicationName = updaterSettings.appName;
+            this.UpdatableObjects = updatableObjects;
+
+            UpdatableObjects.Add(new UpdateObject(updaterSettings));
 
             // Check for Updates
             getVersionsAsynch();
@@ -133,8 +137,11 @@ namespace WpfAppLib.Updater
         /// <returns></returns>
         private void getVersions()
         {
-            UpdateStateChanged.Invoke(this, new UpdateStateChangedEventArgs { stateMsg = "Check for updates: " + this.UpdatableObject.ApplicationName , state = 1 });
-            this.UpdatableObject.compareFiles();
+            foreach (UpdateObject _appEntry in this.UpdatableObjects)
+            {
+                UpdateStateChanged.Invoke(this, new UpdateStateChangedEventArgs { stateMsg = "Check for updates: " + _appEntry.ApplicationName , state = 1 });
+                _appEntry.compareFiles();
+            }
 
             Thread.Sleep(200);
             UpdateStateChanged.Invoke(this, new UpdateStateChangedEventArgs { stateMsg = "Check for updates done", state = 0 });
@@ -162,8 +169,25 @@ namespace WpfAppLib.Updater
         /// </summary>
         private void getUpdate()
         {
-                 
-            this.UpdatableObject.performUpdate();          
+            bool _retVal = true;
+
+            foreach (UpdateObject _appEntry in this.UpdatableObjects)
+            {
+                if (!_appEntry.performUpdate(this.OwnApplicationName))
+                {
+                    _retVal = false;
+                }
+            }
+
+            Thread.Sleep(200);
+            if (_retVal)
+            {
+                UpdateStateChanged.Invoke(this, new UpdateStateChangedEventArgs { stateMsg = "Download done", state = 0 });
+            }
+            else
+            {
+                UpdateStateChanged.Invoke(this, new UpdateStateChangedEventArgs { stateMsg = "Download done with error", state = 2 });
+            }
 
         }
 
