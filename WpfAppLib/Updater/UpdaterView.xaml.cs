@@ -1,5 +1,5 @@
 ﻿using System.Windows;
-
+using System.Windows.Media.Imaging;
 
 namespace WpfAppLib.Updater
 {
@@ -68,7 +68,7 @@ namespace WpfAppLib.Updater
         /// </summary>
         /// <param name="position">position where the pop up window should be displayed</param>
         /// <param name="updaterSettings"></param>
-        public UpdaterView(Point position, updaterSettingsData updaterSettings)
+        public UpdaterView(Point position, updaterSettingsData updaterSettings, BitmapImage windowIcon)
         {
 
             this.windowStartPosistion = position;
@@ -76,6 +76,17 @@ namespace WpfAppLib.Updater
             InitializeComponent();
             viewModel = new UpdaterViewModel(updaterSettings);
             this.DataContext = viewModel;
+            
+            if (windowIcon != null)
+            {
+                this.Icon = windowIcon;
+            }
+            else
+            {
+                this.Icon = null;
+            }
+
+
 
         }
 

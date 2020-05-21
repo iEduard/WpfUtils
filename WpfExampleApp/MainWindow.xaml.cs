@@ -4,6 +4,9 @@ using System.Windows;
 using WpfAppLib.Infodialog;
 using WpfAppLib.Updater;
 using WpfAppLib.MultiUpdater;
+using System;
+using System.IO;
+using System.Windows.Media.Imaging;
 
 namespace WpfExampleApp
 {
@@ -18,6 +21,18 @@ namespace WpfExampleApp
         public MainWindow()
         {
             InitializeComponent();
+
+            var _windowIcon =  new BitmapImage();
+            using (Stream stream = Assembly.GetExecutingAssembly().GetManifestResourceStream("WpfExampleApp.Resources.studie.png"))
+            {
+                _windowIcon.BeginInit();
+                _windowIcon.StreamSource = stream;
+                _windowIcon.CacheOption = BitmapCacheOption.OnLoad;
+                _windowIcon.EndInit();
+                _windowIcon.Freeze();
+            }
+
+            this.Icon = _windowIcon;
         }
 
         /// <summary>
@@ -52,8 +67,20 @@ namespace WpfExampleApp
                 settingsServerPath = @"U:\tmp\WpfExampleApp\bin\Debug\"
             };
 
+
+            // Get the icon file from the resources
+            var _windowIcon = new BitmapImage();
+            using (Stream stream = Assembly.GetExecutingAssembly().GetManifestResourceStream("WpfExampleApp.Resources.studie.png"))
+            {
+                _windowIcon.BeginInit();
+                _windowIcon.StreamSource = stream;
+                _windowIcon.CacheOption = BitmapCacheOption.OnLoad;
+                _windowIcon.EndInit();
+                _windowIcon.Freeze();
+            }
+
             // Create the updater object
-            UpdaterView _myUpdateView = new UpdaterView(new Point(), _updaterSettings);
+            UpdaterView _myUpdateView = new UpdaterView(new Point(), _updaterSettings, null);
 
             // Show the updater object
             _myUpdateView.Show();
