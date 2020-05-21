@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Media;
@@ -15,6 +14,8 @@ namespace WpfAppLib.Updater
         private string statusBarText;
         private Brush statusBarBackground;
 
+        private UpdateObject updatableObject;
+
         #endregion
 
         #region public variables
@@ -22,8 +23,16 @@ namespace WpfAppLib.Updater
 
         /// <summary>
         /// Updatable object
+        /// This object is used to bind the information to the UI
         /// </summary>
-        public UpdateObject UpdatableObject;
+        public UpdateObject UpdatableObject 
+        {
+            get { return updatableObject; } 
+            set{
+                updatableObject = value;
+                NotifyPropertyChanged("UpdatableObject");
+            }
+        }
 
         /// <summary>
         /// Label content of ths statusbart

@@ -44,7 +44,7 @@ namespace WpfExampleApp
             WpfAppLib.Updater.updaterSettingsData _updaterSettings = new WpfAppLib.Updater.updaterSettingsData
             {
                 appFileName = "WpfExampleApp.exe",
-                appLocalPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location),
+                appLocalPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "\\",
                 appName = Assembly.GetExecutingAssembly().GetName().Name,
                 appServerPath = @"U:\tmp\WpfExampleApp\bin\Debug\",
                 settingsFileName = "Settings.xml",
