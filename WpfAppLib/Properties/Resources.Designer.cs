@@ -19,7 +19,7 @@ namespace WpfAppLib.Properties {
     // -Klasse über ein Tool wie ResGen oder Visual Studio automatisch generiert.
     // Um einen Member hinzuzufügen oder zu entfernen, bearbeiten Sie die .ResX-Datei und führen dann ResGen
     // mit der /str-Option erneut aus, oder Sie erstellen Ihr VS-Projekt neu.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class Resources {
@@ -61,23 +61,43 @@ namespace WpfAppLib.Properties {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap download {
+            get {
+                object obj = ResourceManager.GetObject("download", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die ********************************************************************************
-        ///Version 1.3		06.03.2019
+        ///Version 1.6		29.04.2020
         ///
-        ///#Updater
-        ///-Added input string for the local path. If the dll will be bind to an executable the method previously used will fail
-        ///-Fixed the update check mechanism. Some newer applications would be downgraded in some cases.
+        ///-Updated the updater to be allow construtors with settings directly delivered
+        ///
+        ///-Removed depricated code linked to old projects
+        ///
         ///
         ///********************************************************************************
-        ///Version 1.2		21.12.2018 
+        ///Version 1.5		31.12.2019
         ///
-        ///#Updater
-        ///-Added the statusbar to the ui
-        ///-Changed the information  [Rest der Zeichenfolge wurde abgeschnitten]&quot;; ähnelt.
+        ///-Added an cunstructor for the updateer. All applications need to pass through the own application name if the own application 
+        ///	is also set as an updatable obj [Rest der Zeichenfolge wurde abgeschnitten]&quot;; ähnelt.
         /// </summary>
         public static string History {
             get {
                 return ResourceManager.GetString("History", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap info {
+            get {
+                object obj = ResourceManager.GetObject("info", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
     }

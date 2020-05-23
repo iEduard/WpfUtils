@@ -1,4 +1,6 @@
-﻿using System.Windows;
+﻿using System.IO;
+using System.Reflection;
+using System.Windows;
 using System.Windows.Media.Imaging;
 
 namespace WpfAppLib.Updater
@@ -83,7 +85,17 @@ namespace WpfAppLib.Updater
             }
             else
             {
-                this.Icon = null;
+                // Get the icon file from the resources
+                var _windowIcon = new BitmapImage();
+                using (Stream stream = Assembly.Load(this.Name).GetManifestResourceStream("WpfAppLib.Resources.info.png"))
+                {
+                    _windowIcon.BeginInit();
+                    _windowIcon.StreamSource = stream;
+                    _windowIcon.CacheOption = BitmapCacheOption.OnLoad;
+                    _windowIcon.EndInit();
+                    _windowIcon.Freeze();
+                }
+
             }
 
 
