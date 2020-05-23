@@ -52,6 +52,11 @@
     <Compile Include="MultiUpdater\Settings.cs" />
     <Compile Include="MultiUpdater\UpdateObject.cs" />
     <Compile Include="MultiUpdater\Updater.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Updater\Settings.cs" />
     <Compile Include="Updater\UpdateObject.cs" />
     <Compile Include="Updater\Updater.cs" />
@@ -84,11 +89,6 @@
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
@@ -96,6 +96,7 @@
     </Compile>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
+      <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
@@ -119,10 +120,20 @@
     <Resource Include="MultiUpdater\SettingsExample.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Resources\download.png" />
+    <Resource Include="Infodialog\info.png" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Resources\info.png" />
+    <Resource Include="Updater\download.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="MultiUpdater\download.png" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Resources\download.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\info.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

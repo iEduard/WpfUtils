@@ -6,7 +6,8 @@
         xmlns:local="clr-namespace:WpfAppLib"
         mc:Ignorable="d"
         Title="Updater" Height="300" Width="300"
-        SizeToContent="Width">
+        SizeToContent="Width"
+        Icon="download.png">
     <Grid>
         <DockPanel>
             <StatusBar DockPanel.Dock="Bottom"

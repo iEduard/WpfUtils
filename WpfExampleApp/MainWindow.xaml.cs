@@ -4,8 +4,6 @@ using System.Windows;
 using WpfAppLib.Infodialog;
 using WpfAppLib.Updater;
 using WpfAppLib.MultiUpdater;
-using System;
-using System.IO;
 using System.Windows.Media.Imaging;
 
 namespace WpfExampleApp
@@ -81,6 +79,16 @@ namespace WpfExampleApp
 
             // Create the updater object
             UpdaterView _myUpdateView = new UpdaterView(new Point(), _updaterSettings, null);
+
+            // Change the texts of the ui elements
+            //_myUpdateView.CheckUpdatesButtonText = "Loooooking";
+            //_myUpdateView.UpdateButtonText = "Get down on it";
+            //_myUpdateView.CancelButtonText = "Nope..";
+            //_myUpdateView.LocalPathLabelText = "lo path";
+            //_myUpdateView.LocalVersionLabelText = "lo ver";
+            //_myUpdateView.RemotePathLabelText = "remo path";
+            //_myUpdateView.RemoteVersionLabelText = "remo ver";
+
 
             // Show the updater object
             _myUpdateView.Show();

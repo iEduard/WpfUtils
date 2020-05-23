@@ -139,11 +139,11 @@ namespace WpfAppLib.Updater
         }
 
         /// <summary>
-        /// 
+        /// Compare the local with the remote file.
+        /// Compared by the file information of the two files. 
+        /// All version parts are used to compare. Major, minor, revision, build
         /// </summary>
-        /// <param name="localFileDir"></param>
-        /// <param name="updateFileDir"></param>
-        /// <returns></returns>
+        /// <returns>Returns true if the remote fileversion is newer than the local version.</returns>
         public bool compareFiles()
         {
             bool retval = false;
@@ -231,45 +231,45 @@ namespace WpfAppLib.Updater
         }
 
         /// <summary>
-        /// 
+        /// Compare the different versions Major, Minor,Revision, Build and check if the remote version is newer than the ĺocal one.
         /// </summary>
-        /// <param name="fileLocal"></param>
-        /// <param name="fileUpdate"></param>
-        /// <returns></returns>
-        private bool compareFileVersion(FileVersionInfo fileLocal, FileVersionInfo fileUpdate)
+        /// <param name="localFile">local ´file informations</param>
+        /// <param name="remoteFile">remote file informations</param>
+        /// <returns>Returns true if the online version is newer</returns>
+        private bool compareFileVersion(FileVersionInfo localFile, FileVersionInfo remoteFile)
         {
-
+            // Init the return valiue
             bool retval = false;
 
-            if (fileUpdate.FileMajorPart > fileLocal.FileMajorPart)
+            if (remoteFile.FileMajorPart > localFile.FileMajorPart)
             {
                 retval = true;
             }
-            else if (fileUpdate.FileMajorPart < fileLocal.FileMajorPart)
+            else if (remoteFile.FileMajorPart < localFile.FileMajorPart)
             {
                 retval = false;
             }
-            else if (fileUpdate.FileMinorPart > fileLocal.FileMinorPart)
+            else if (remoteFile.FileMinorPart > localFile.FileMinorPart)
             {
                 retval = true;
             }
-            else if (fileUpdate.FileMinorPart < fileLocal.FileMinorPart)
+            else if (remoteFile.FileMinorPart < localFile.FileMinorPart)
             {
                 retval = false;
             }
-            else if (fileUpdate.FileBuildPart > fileLocal.FileBuildPart)
+            else if (remoteFile.FileBuildPart > localFile.FileBuildPart)
             {
                 retval = true;
             }
-            else if (fileUpdate.FileBuildPart < fileLocal.FileBuildPart)
+            else if (remoteFile.FileBuildPart < localFile.FileBuildPart)
             {
                 retval = false;
             }
-            else if (fileUpdate.FilePrivatePart > fileLocal.FilePrivatePart)
+            else if (remoteFile.FilePrivatePart > localFile.FilePrivatePart)
             {
                 retval = true;
             }
-            else if (fileUpdate.FilePrivatePart < fileLocal.FilePrivatePart)
+            else if (remoteFile.FilePrivatePart < localFile.FilePrivatePart)
             {
                 retval = false;
             }
@@ -281,80 +281,7 @@ namespace WpfAppLib.Updater
         /// <summary>
         /// Update the running application
         /// </summary>
-        /// <param name="applicationName"></param>
-        /// <returns></returns>
-        public bool performUpdate(string applicationName)
-        {
-
-            bool _retVal = false;
-
-            if (!this.IsSelectedToDownload)
-            {
-                return _retVal;
-            }
-
-            Console.WriteLine("Performing Update for " + this.settings.appName + "...");
-
-            // Check if the Destination Directory allready exists
-            // If not create it
-            if (!Directory.Exists(this.settings.appLocalPath))
-            {
-                Directory.CreateDirectory(this.settings.appLocalPath);
-            }
-
-
-            // Da wir den Instally selber nicht so einfach ersetzen können da er ja bereits läuft müssen wir ihm einen besonderen Namen geben mit dem versionszusatz
-            string _fileNameAddon = "";
-            bool _isRunningApplicatio = (this.settings.appName == applicationName) && (applicationName != "");
-
-            if (_isRunningApplicatio)
-            {
-                _fileNameAddon = this.settings.appFileName.Replace(".exe", "") + "_" + FileVersionInfo.GetVersionInfo(this.settings.appServerPath + this.settings.appFileName).FileVersion + ".exe";
-            }
-            else
-            {
-                _fileNameAddon = this.settings.appFileName;
-            }
-
-            // perform the update of the execution file
-            CopyMaster copyFiles = new CopyMaster();
-            _retVal = copyFiles.copyFile(this.settings.appServerPath + this.settings.appFileName, this.settings.appLocalPath + _fileNameAddon, true);
-
-            #region Update the settings File
-
-            // Check if the Destination Directory allready exists
-            // If not create it
-            if (!Directory.Exists(this.settings.settingsLocalPath))
-            {
-                Directory.CreateDirectory(this.settings.settingsLocalPath);
-            }
-
-            if (this.settings.settingsFileName != "" && _retVal)
-            {
-                // perform the update of the execution file               
-                bool _var = copyFiles.copyFile(this.settings.settingsServerPath + this.settings.settingsFileName, this.settings.settingsLocalPath + this.settings.settingsFileName, true);
-            }
-
-            
-
-            #endregion
-
-            Console.WriteLine("... Update done");
-
-            if (_isRunningApplicatio)
-            {
-                Console.WriteLine("");
-                Console.WriteLine("--------ACHTUNG--------");
-                Console.WriteLine("Die laufende Applikation wurde aktualisiert auf dem Verzeichniss abgelegt. Bitte die Anwendung beenden und die alte anwendung löschen und die neue in instally umbennenn");
-                Console.WriteLine("");
-            }
-            return _retVal;
-        }
-
-        /// <summary>
-        /// Update the running application
-        /// </summary>
-        /// <returns></returns>
+        /// <returns>Returns true if the update (download) perfomed successfully</returns>
         public bool performUpdate()
         {
 
@@ -382,8 +309,7 @@ namespace WpfAppLib.Updater
             CopyMaster copyFiles = new CopyMaster();
             _retVal = copyFiles.copyFile(this.settings.appServerPath + this.settings.appFileName, this.settings.appLocalPath + _fileNameAddon, true);
 
-            #region Update the settings File
-
+            // Update the settings File
             // Check if the Destination Directory allready exists
             // If not create it
             if (!Directory.Exists(this.settings.settingsLocalPath))
@@ -397,21 +323,18 @@ namespace WpfAppLib.Updater
                 bool _var = copyFiles.copyFile(this.settings.settingsServerPath + this.settings.settingsFileName, this.settings.settingsLocalPath + this.settings.settingsFileName, true);
             }
 
-
-
-            #endregion
-
             Console.WriteLine("... Update done");
 
             return _retVal;
         }
 
-
         /// <summary>
-        /// Function to shorten the path to visualize
+        /// Function to shorten the path to visualize.
+        /// A path of: C:\Users\Edu\GitRepos\WpfUtils\WpfExampleApp\bin\Debug
+        /// Will be shortened to: C:\Users\...\bin\Debug
         /// </summary>
-        /// <param name="path"></param>
-        /// <returns></returns>
+        /// <param name="path">the path to shorten</param>
+        /// <returns>The shortened path</returns>
         private string pathShortener(string path)
         {
             // Define some variables to use in this function

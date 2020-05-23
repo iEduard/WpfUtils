@@ -16,6 +16,18 @@ namespace WpfAppLib.Updater
 
         private UpdateObject updatableObject;
 
+
+        // UI Text fields
+        private string checkUpdatesButtonText = "Check for updates";
+        private string updateButtonText = "Update";
+        private string cancelButtonText = "Cancel";
+
+        private string localPathLabelText = "Local path:";
+        private string localVersionLabelText = "Local version:";
+        private string remotePathLabelText = "Remote path:";
+        private string remoteVersionLabelText = "Remote version:";
+
+
         #endregion
 
         #region public variables
@@ -61,42 +73,103 @@ namespace WpfAppLib.Updater
         }
 
 
+        public string CheckUpdatesButtonText 
+        {
+            get
+            {
+                return checkUpdatesButtonText;
+            }
+            set
+            {
+                checkUpdatesButtonText = value;
+                NotifyPropertyChanged("CheckUpdatesButtonTex");
+            }
+        }
+
+        public string UpdateButtonText 
+        {
+            get 
+            {
+                return updateButtonText;
+            }
+            set 
+            {
+                updateButtonText = value;
+                NotifyPropertyChanged("UpdateButtonText");
+            } 
+        }
+
+        public string CancelButtonText 
+        {
+            get
+            {
+                return cancelButtonText;
+            }
+            set
+            {
+                cancelButtonText = value;
+                NotifyPropertyChanged("CancelButtonText");
+            }
+        }
+
+        public string LocalPathLabelText
+        {
+            get
+            {
+                return localPathLabelText;
+            }
+            set
+            {
+                localPathLabelText = value;
+                NotifyPropertyChanged("LocalPathLabelText");
+            }
+
+        }
+
+        public string LocalVersionLabelText
+        {
+            get
+            {
+                return localVersionLabelText;
+            }
+            set
+            {
+                localVersionLabelText = value;
+                NotifyPropertyChanged("LocalVersionLabelText");
+            }
+
+        }
+
+        public string RemotePathLabelText
+        {
+            get
+            {
+                return remotePathLabelText;
+            }
+            set
+            {
+                remotePathLabelText = value;
+                NotifyPropertyChanged("RemotePathLabelText");
+            }
+
+        }
+
+        public string RemoteVersionLabelText
+        {
+            get
+            {
+                return remoteVersionLabelText;
+            }
+            set
+            {
+                remoteVersionLabelText = value;
+                NotifyPropertyChanged("RemoteVersionLabelText");
+            }
+
+        }
+
+
         #endregion
-
-        /// <summary>
-        /// Update view model with settings path to the updater settings file to update the requested applications
-        /// </summary>
-        /// <param name="settingsPath"></param>
-        public UpdaterViewModel(string settingsPath, string localPath)
-        {
-            //// Create a new observable collection
-            //UpdatableObjects = new ObservableCollection<UpdateObject>();
-
-            //StatusBarBackground = Brushes.Orange;
-            //StatusBarText = "Checking for available updates";
-
-            //updater = new Updater(settingsPath, localPath, UpdatableObjects);
-            //updater.UpdateStateChanged += UpdaterStatusUpdate;
-        }
-
-        /// <summary>
-        /// Updater view model with running application to be updated and path for the updater settings
-        /// </summary>
-        /// <param name="settingsPath">own settings path of the updater</param>
-        /// <param name="localPath">local path of the running application</param>
-        /// <param name="applicationName">own application name</param>
-        public UpdaterViewModel(string settingsPath, string localPath, string applicationName)
-        {
-            //// Create a new observable collection
-            //UpdatableObjects = new ObservableCollection<UpdateObject>();
-
-            //StatusBarBackground = Brushes.Orange;
-            //StatusBarText = "Checking for available updates";
-
-            //updater = new Updater(settingsPath, localPath, UpdatableObjects, applicationName);
-            //updater.UpdateStateChanged += UpdaterStatusUpdate;
-        }
-
 
         /// <summary>
         /// Updater view model with updater settings directly handling over
@@ -138,7 +211,8 @@ namespace WpfAppLib.Updater
 
 
         /// <summary>
-        /// 
+        /// Updater status updated function. Will be triggered by the updatable objects
+        /// Method tou pdate the statusbar ui
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="args"></param>

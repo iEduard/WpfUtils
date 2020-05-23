@@ -1,6 +1,4 @@
-﻿using System.IO;
-using System.Reflection;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Media.Imaging;
 
 namespace WpfAppLib.Updater
@@ -26,44 +24,123 @@ namespace WpfAppLib.Updater
         /// </summary>
         private UpdaterViewModel viewModel;
 
-        #endregion 
+        #endregion
 
+
+        #region public variables
 
         /// <summary>
-        /// Update object with settings file and local path
+        /// Check for updates button text
         /// </summary>
-        /// <param name="position">position where the pop up window should be displayed</param>
-        /// <param name="settingsPath">path of the update configuration file</param>
-        /// <param name="localPath">local path of the application</param>
-        public UpdaterView(Point position, string settingsPath, string localPath)
+        public string CheckUpdatesButtonText 
         {
+            get
+            {
+                return viewModel.CheckUpdatesButtonText;
+            }
+            set
+            {
+                viewModel.CheckUpdatesButtonText = value;
+            }
+        }
 
-            this.windowStartPosistion = position;
-
-            InitializeComponent();
-            viewModel = new UpdaterViewModel(settingsPath, localPath);
-            this.DataContext = viewModel;
+        /// <summary>
+        /// Textfield of the update button text
+        /// </summary>
+        public string UpdateButtonText
+        {
+            get 
+            {
+                return viewModel.UpdateButtonText;
+            }
+            set
+            {
+                viewModel.UpdateButtonText = value;
+            }
 
         }
 
         /// <summary>
-        /// Update object with path to settings and own application name to update currently running application as well
+        /// Cancel Button text
         /// </summary>
-        /// <param name="position">position where the pop up window should be displayed</param>
-        /// <param name="settingsPath">path of the update configuration file</param>
-        /// <param name="localPath">local path of the application</param>
-        /// <param name="applicationName">name of the application called the lib. Only needed if this aopplication should also be updatable</param>
-        public UpdaterView(Point position, string settingsPath, string localPath, string applicationName)
+        public string CancelButtonText
         {
+            get
+            {
+                return viewModel.CancelButtonText;
+            }
+            set
+            {
+                viewModel.CancelButtonText = value;
+            }
+        }
 
-            this.windowStartPosistion = position;
 
-            InitializeComponent();
-            viewModel = new UpdaterViewModel(settingsPath, localPath, applicationName);
-            this.DataContext = viewModel;
+        /// <summary>
+        /// Local path label text
+        /// </summary>
+        public string LocalPathLabelText
+        {
+            get
+            {
+                return viewModel.LocalPathLabelText;
+            }
+            set
+            {
+                viewModel.LocalPathLabelText = value;
+            }
 
         }
 
+        /// <summary>
+        /// Local version label text
+        /// </summary>
+        public string LocalVersionLabelText
+        {
+            get
+            {
+                return viewModel.LocalVersionLabelText;
+            }
+            set
+            {
+                viewModel.LocalVersionLabelText = value;
+            }
+
+        }
+
+        /// <summary>
+        /// Remote path label text
+        /// </summary>
+        public string RemotePathLabelText
+        {
+            get
+            {
+                return viewModel.RemotePathLabelText;
+            }
+            set
+            {
+                viewModel.RemotePathLabelText = value;
+            }
+
+        }
+
+        /// <summary>
+        /// Remote version label text
+        /// </summary>
+        public string RemoteVersionLabelText
+        {
+            get
+            {
+                return viewModel.RemoteVersionLabelText;
+            }
+            set
+            {
+                viewModel.RemoteVersionLabelText = value;
+            }
+        }
+
+
+        #endregion
 
         /// <summary>
         /// Update object with settings. Used if the running application is the only application to be updated without an settings file
@@ -86,15 +163,15 @@ namespace WpfAppLib.Updater
             else
             {
                 // Get the icon file from the resources
-                var _windowIcon = new BitmapImage();
-                using (Stream stream = Assembly.Load(this.Name).GetManifestResourceStream("WpfAppLib.Resources.info.png"))
-                {
-                    _windowIcon.BeginInit();
-                    _windowIcon.StreamSource = stream;
-                    _windowIcon.CacheOption = BitmapCacheOption.OnLoad;
-                    _windowIcon.EndInit();
-                    _windowIcon.Freeze();
-                }
+                //var _windowIcon = new BitmapImage();
+                //using (Stream stream = Assembly.Load(this.Name).GetManifestResourceStream("WpfAppLib.Resources.info.png"))
+                //{
+                //    _windowIcon.BeginInit();
+                //    _windowIcon.StreamSource = stream;
+                //    _windowIcon.CacheOption = BitmapCacheOption.OnLoad;
+                //    _windowIcon.EndInit();
+                //    _windowIcon.Freeze();
+                //}
 
             }
 

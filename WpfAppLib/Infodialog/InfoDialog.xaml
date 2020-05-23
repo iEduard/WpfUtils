@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfAppLib"
         mc:Ignorable="d"
-        Title="InfoDialog" Height="350" Width="500">
+        Title="InfoDialog" Height="350" Width="500"
+        Icon="info.png">
     
     <Grid>
         <StackPanel Grid.ColumnSpan="3">

@@ -8,7 +8,8 @@
         Title="Updater" 
         Width="400" Height="200"
         MinWidth="400"  MinHeight="200"
-        SizeToContent="Width">
+        SizeToContent="Width"
+        Icon="download.png">
     <Grid>
         <DockPanel>
             <StatusBar DockPanel.Dock="Bottom"
@@ -38,34 +39,37 @@
                         HorizontalAlignment="Right"
                         Margin="0,0,0,5">
                 <Button Name="CheckUpdatesButton"                      
-                        Click="CheckUpdatesButton_Click">Auf Updates prüfen</Button>
+                        Click="CheckUpdatesButton_Click" 
+                        Content="{Binding CheckUpdatesButtonText}"/>
                 <Button Name="UpdateButton"
                         Margin="5,0,0,0"
-                        Click="UpdateButton_Click">Update</Button>
+                        Click="UpdateButton_Click"
+                        Content="{Binding UpdateButtonText}"/>
                 <Button Name="CancelButton"
                         Margin="5,0,5,0"
-                        Click="CancelButton_Click">Abbrechen</Button>
+                        Click="CancelButton_Click"
+                        Content="{Binding CancelButtonText}"/>
             </StackPanel>
             <StackPanel DockPanel.Dock="Top"
                         Margin="0,10,0,0"
                         Orientation="Vertical">
                 <StackPanel Orientation="Horizontal">
-                    <Label Content="Local path: "/>
+                    <Label Content="{Binding LocalPathLabelText}"/>
                     <Label Content="{Binding UpdatableObject.LocalUrl}"/>
                 </StackPanel>
 
                 <StackPanel Orientation="Horizontal">
-                    <Label Content="Local version: "/>
+                    <Label Content="{Binding LocalVersionLabelText}"/>
                     <Label Content="{Binding UpdatableObject.LocalVersion}"/>
                 </StackPanel>
 
                 <StackPanel Orientation="Horizontal">
-                    <Label Content="Remote path: "/>
+                    <Label Content="{Binding RemotePathLabelText}"/>
                     <Label Content="{Binding UpdatableObject.RemoteUrl}"/>
                 </StackPanel>
 
                 <StackPanel Orientation="Horizontal">
-                    <Label Content="Remote version: "/>
+                    <Label Content="{Binding RemoteVersionLabelText}"/>
                     <Label Content="{Binding UpdatableObject.RemoteVersion}"/>
                 </StackPanel>
             </StackPanel>
