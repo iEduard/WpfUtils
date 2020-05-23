@@ -14,6 +14,7 @@ namespace WpfAppLib.MultiUpdater
         private MultiUpdater updater;
         private string statusBarText;
         private Brush statusBarBackground;
+        private string windowTitleText = "Update";
 
         #endregion
 
@@ -48,6 +49,20 @@ namespace WpfAppLib.MultiUpdater
             {
                 statusBarBackground = value;
                 NotifyPropertyChanged("StatusBarBackground");
+            }
+        }
+
+
+        public string WindowTitleText
+        {
+            get
+            {
+                return windowTitleText;
+            }
+            set
+            {
+                windowTitleText = value;
+                NotifyPropertyChanged("WindowTitleText");
             }
         }
 

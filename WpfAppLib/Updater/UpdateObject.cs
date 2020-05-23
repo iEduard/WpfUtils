@@ -15,10 +15,9 @@ namespace WpfAppLib.Updater
         // Private Variables
         private bool isSelectedToDownload;
         private bool newestVersionInstalled;
-        private int downloadState = 0;
         private updaterSettingsData settings;
-        private string remoteVersion;
-        private string localVersion;
+        private string remoteVersion = "nul";
+        private string localVersion = "nul";
 
         #endregion
 
@@ -134,7 +133,6 @@ namespace WpfAppLib.Updater
             // Init the States
             this.IsSelectedToDownload = false;
             this.NewestVersionInstalled = false;
-            this.downloadState = 0;
 
         }
 
@@ -147,6 +145,23 @@ namespace WpfAppLib.Updater
         public bool compareFiles()
         {
             bool retval = false;
+
+            // Get the File versions from remote and local
+            try
+            {
+                LocalVersion = FileVersionInfo.GetVersionInfo(this.settings.appLocalPath + this.settings.appFileName).FileVersion.ToString();
+            }
+            catch
+            {
+            }
+
+            try
+            {
+                RemoteVersion = FileVersionInfo.GetVersionInfo(this.settings.appServerPath + this.settings.appFileName).FileVersion.ToString();
+            }
+            catch
+            {
+            }
 
             if (!File.Exists(this.settings.appLocalPath + this.settings.appFileName))
             {
@@ -174,36 +189,10 @@ namespace WpfAppLib.Updater
 
                 try
                 {
-                    FileVersionInfo localFileVersion = FileVersionInfo.GetVersionInfo(this.settings.appLocalPath + this.settings.appFileName);
-                    LocalVersion = localFileVersion.FileVersion.ToString();
-
-                }
-                catch
-                {
-                    LocalVersion = "nul";
-                    // Do nothing
-                }
-
-                try
-                {
-                    FileVersionInfo updateFileVersion = FileVersionInfo.GetVersionInfo(this.settings.appServerPath + this.settings.appFileName);
-                    RemoteVersion = updateFileVersion.FileVersion.ToString();
-                }
-                catch
-                {
-                    RemoteVersion = "nul";
-                    // Do nothing
-                }
-
-
-                try
-                {
                     // Get the file version for the notepad.
                     // Use either of the two following commands.
                     FileVersionInfo localFileVersion = FileVersionInfo.GetVersionInfo(this.settings.appLocalPath + this.settings.appFileName);
                     FileVersionInfo updateFileVersion = FileVersionInfo.GetVersionInfo(this.settings.appServerPath + this.settings.appFileName);
-
-                    
 
                     if (compareFileVersion(localFileVersion, updateFileVersion))
                     {
@@ -218,7 +207,6 @@ namespace WpfAppLib.Updater
                         Console.WriteLine("Current Version installed for: " + updateFileVersion.FileDescription + ": " + localFileVersion.FileVersion);
                         this.NewestVersionInstalled = true;
                     }
-
                 }
                 catch
                 {
@@ -382,7 +370,6 @@ namespace WpfAppLib.Updater
             {
                 _sb.Append("\\...\\");
 
-
                 // Add the second part
                 for (int _i = _splits.Length - 1; _i > _firstPartCount; _i--)
                 {
@@ -409,10 +396,8 @@ namespace WpfAppLib.Updater
                         _secondPartFound = true;
                         break;
                     }
-
                 }
                 _sb.Append(_secondPart);
-
             }
 
             // If both parts are found we will create the shortened path string. Otherwise we will return the input path 

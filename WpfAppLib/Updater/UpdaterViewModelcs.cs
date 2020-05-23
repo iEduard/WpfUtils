@@ -26,7 +26,7 @@ namespace WpfAppLib.Updater
         private string localVersionLabelText = "Local version:";
         private string remotePathLabelText = "Remote path:";
         private string remoteVersionLabelText = "Remote version:";
-
+        private string windowTitleText = "Update";
 
         #endregion
 
@@ -166,6 +166,19 @@ namespace WpfAppLib.Updater
                 NotifyPropertyChanged("RemoteVersionLabelText");
             }
 
+        }
+
+        public string WindowTitleText
+        {
+            get
+            {
+                return windowTitleText;
+            }
+            set
+            {
+                windowTitleText = value;
+                NotifyPropertyChanged("WindowTitleText");
+            }
         }
 
 

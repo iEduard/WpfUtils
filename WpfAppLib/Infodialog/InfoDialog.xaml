@@ -5,37 +5,38 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfAppLib"
         mc:Ignorable="d"
-        Title="InfoDialog" Height="350" Width="500"
+        Title="{Binding WindowTitleText}" 
+        Height="350" Width="500"
         Icon="info.png">
     
     <Grid>
         <StackPanel Grid.ColumnSpan="3">
-        <StackPanel Margin="10,10,0,0" Orientation="Horizontal" HorizontalAlignment="Left">
-            <Label Content="Version: " 
+            <StackPanel Margin="10,10,0,0" Orientation="Horizontal" HorizontalAlignment="Left">
+                <Label Content="{Binding VersionLabelText}" 
                        Padding="0"/>
-            <Label Name="lVersion" 
+                <Label Name="lVersion" 
                        Margin="3,0,0,0" 
                        Content="1.0.0.212321" 
                        Padding="0"/>
-        </StackPanel>
-        <StackPanel Margin="10,0,0,0" Orientation="Horizontal" HorizontalAlignment="Left" >
-            <Label Content="Firma: " 
+            </StackPanel>
+            <StackPanel Margin="10,0,0,0" Orientation="Horizontal" HorizontalAlignment="Left" >
+                <Label Content="{Binding CompanyLabelText}" 
                        Padding="0"/>
-            <Label Name="lCompany" 
+                <Label Name="lCompany" 
                        Margin="14,0,0,0" 
                        Content="SchwEdu GmbH" 
                        Padding="0"/>
-        </StackPanel>
-        <StackPanel Margin="10,0,0,0" Orientation="Horizontal" HorizontalAlignment="Left">
-            <Label Content="Author: " 
+            </StackPanel>
+            <StackPanel Margin="10,0,0,0" Orientation="Horizontal" HorizontalAlignment="Left">
+                <Label Content="{Binding AuthorLabelText}" 
                        Padding="0"/>
-            <Label Name="lAuthor" 
+                <Label Name="lAuthor" 
                        Margin="7,0,0,0" 
                        Content="Eduard Schmidt" 
                        Padding="0"/>
-        </StackPanel>
-        <StackPanel Margin="10,0,0,0" Orientation="Horizontal" HorizontalAlignment="Left">
-                <Label Content="E-Mail: " 
+            </StackPanel>
+            <StackPanel Margin="10,0,0,0" Orientation="Horizontal" HorizontalAlignment="Left">
+                <Label Content="{Binding EMailLabelText}" 
                        Padding="0"/>
                 <Label Name="lemailAdress"
                        Margin="10,0,0,0"
@@ -43,12 +44,12 @@
                        Foreground="Blue"
                        Content="Test" MouseLeftButtonUp="emailLink_Click"
                        />
-        </StackPanel>
-            <Label Content="Info:" 
+            </StackPanel>
+            <Label Content="{Binding InfoLabelText}" 
                    Margin="10,12,0,0" 
                    Padding="0"/>
         </StackPanel>
-    <TextBox Name="tbVersionHistory"  
+        <TextBox Name="tbVersionHistory"  
              TextWrapping="Wrap" 
              Margin="10,106,10,45" 
              VerticalScrollBarVisibility="Auto"/>

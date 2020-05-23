@@ -1,5 +1,7 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Windows;
+using System.Windows.Media.Imaging;
 
 namespace WpfAppLib.Infodialog
 {
@@ -10,12 +12,103 @@ namespace WpfAppLib.Infodialog
     public partial class InfoDialog : Window
     {
 
-        /// <summary>
-        /// Start Position of the Window
-        /// </summary>
-        private Point windowStartPosistion;
+        #region private variables
 
+        private Point windowStartPosistion; // Start Position of the Window
         private string VersionNumber;
+        private InfoDialogViewModel viewModel;
+
+
+        #endregion
+
+
+        #region public variables
+
+
+        /// <summary>
+        /// Set or get the Window title
+        /// </summary>
+        public string WindowTitleText
+        {
+            get
+            {
+                return viewModel.WindowTitleText;
+            }
+            set
+            {
+                viewModel.WindowTitleText = value;
+            }
+        }
+
+
+        public string VersionLabelText
+        {
+            get
+            {
+                return viewModel.VersionLabelText;
+            }
+            set
+            {
+                viewModel.VersionLabelText = value;
+            }
+
+        }
+
+        public string CompanyLabelText
+        {
+            get
+            {
+                return viewModel.CompanyLabelText;
+            }
+            set
+            {
+                viewModel.CompanyLabelText = value;
+            }
+
+        }
+
+        public string AuthorLabelText
+        {
+            get
+            {
+                return viewModel.AuthorLabelText;
+            }
+            set
+            {
+                viewModel.AuthorLabelText = value;
+            }
+
+        }
+
+        public string EMailLabelText
+        {
+            get
+            {
+                return viewModel.EMailLabelText;
+            }
+            set
+            {
+                viewModel.EMailLabelText = value;
+            }
+
+        }
+
+        public string InfoLabelText
+        {
+            get
+            {
+                return viewModel.InfoLabelText;
+            }
+            set
+            {
+                viewModel.InfoLabelText = value;
+            }
+
+        }
+
+        #endregion
+
+
 
 
         /// <summary>
@@ -28,10 +121,14 @@ namespace WpfAppLib.Infodialog
         /// <param name="author">Author of the programm to be shown</param>
         /// <param name="eMailAdress">Mail address to be shown</param>
         /// <param name="language">currently unuesed</param>
-        public InfoDialog(Point position, string versionNumber, string historyText, string companyName, string author, string eMailAdress, string language)
+        public InfoDialog(Point position, string versionNumber, string historyText, string companyName, string author, string eMailAdress, BitmapImage windowIcon)
         {
             windowStartPosistion = position;
+            viewModel = new InfoDialogViewModel();
+
+
             InitializeComponent();
+            this.DataContext = viewModel;
 
             VersionNumber = versionNumber;
 
@@ -46,6 +143,12 @@ namespace WpfAppLib.Infodialog
 
             // Set the Textbox to read only
             tbVersionHistory.IsReadOnly = true;
+
+            // Change the icon if teh window icon is transmitted            
+            if (windowIcon != null)
+            {
+                this.Icon = windowIcon;
+            }
         }
 
 
@@ -92,5 +195,6 @@ namespace WpfAppLib.Infodialog
             this.Top = windowStartPosistion.Y;
         }
 
+    
     }
 }

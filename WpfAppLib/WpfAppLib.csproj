@@ -49,6 +49,7 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Infodialog\InfoDialogViewModel.cs" />
     <Compile Include="MultiUpdater\Settings.cs" />
     <Compile Include="MultiUpdater\UpdateObject.cs" />
     <Compile Include="MultiUpdater\Updater.cs" />

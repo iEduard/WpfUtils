@@ -40,7 +40,20 @@ namespace WpfExampleApp
         /// <param name="e"></param>
         private void btInfo_Click(object sender, RoutedEventArgs e)
         {
-            InfoDialog _myInfoDialo = new InfoDialog(new Point(), "1.0.0.0", "Created", "Company", "Eduard Schmidt", "esc@someProvider.org", "German");
+
+            // Get the icon file from the resources
+            var _windowIcon = new BitmapImage();
+            using (Stream stream = Assembly.GetExecutingAssembly().GetManifestResourceStream("WpfExampleApp.Resources.studie.png"))
+            {
+                _windowIcon.BeginInit();
+                _windowIcon.StreamSource = stream;
+                _windowIcon.CacheOption = BitmapCacheOption.OnLoad;
+                _windowIcon.EndInit();
+                _windowIcon.Freeze();
+            }
+
+
+            InfoDialog _myInfoDialo = new InfoDialog(new Point(), "1.0.0.0", "Created", "Company", "Eduard Schmidt", "esc@someProvider.org", null);
             _myInfoDialo.Show();
         }
 
@@ -88,7 +101,7 @@ namespace WpfExampleApp
             //_myUpdateView.LocalVersionLabelText = "lo ver";
             //_myUpdateView.RemotePathLabelText = "remo path";
             //_myUpdateView.RemoteVersionLabelText = "remo ver";
-
+            //_myUpdateView.WindowTitleText = "Update dialog";
 
             // Show the updater object
             _myUpdateView.Show();

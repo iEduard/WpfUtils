@@ -24,7 +24,28 @@ namespace WpfAppLib.MultiUpdater
         /// </summary>
         private MultiUpdaterViewModel viewModel;
 
-        #endregion 
+        #endregion
+
+
+
+        #region public variables
+
+        /// <summary>
+        /// Set or get the Window title
+        /// </summary>
+        public string WindowTitleText
+        {
+            get
+            {
+                return viewModel.WindowTitleText;
+            }
+            set
+            {
+                viewModel.WindowTitleText = value;
+            }
+        }
+
+        #endregion
 
 
         /// <summary>

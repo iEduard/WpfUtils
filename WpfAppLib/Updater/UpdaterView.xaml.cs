@@ -9,8 +9,6 @@ namespace WpfAppLib.Updater
     public partial class UpdaterView : Window
     {
 
-
-
         #region Private Variables
 
 
@@ -26,11 +24,10 @@ namespace WpfAppLib.Updater
 
         #endregion
 
-
         #region public variables
 
         /// <summary>
-        /// Check for updates button text
+        /// Set or get the Check for updates button text
         /// </summary>
         public string CheckUpdatesButtonText 
         {
@@ -45,7 +42,7 @@ namespace WpfAppLib.Updater
         }
 
         /// <summary>
-        /// Textfield of the update button text
+        /// Set or get the Textfield of the update button text
         /// </summary>
         public string UpdateButtonText
         {
@@ -61,7 +58,7 @@ namespace WpfAppLib.Updater
         }
 
         /// <summary>
-        /// Cancel Button text
+        /// Set or get the Cancel Button text
         /// </summary>
         public string CancelButtonText
         {
@@ -77,7 +74,7 @@ namespace WpfAppLib.Updater
 
 
         /// <summary>
-        /// Local path label text
+        /// Set or get the Local path label text
         /// </summary>
         public string LocalPathLabelText
         {
@@ -93,7 +90,7 @@ namespace WpfAppLib.Updater
         }
 
         /// <summary>
-        /// Local version label text
+        /// Set or get the Local version label text
         /// </summary>
         public string LocalVersionLabelText
         {
@@ -109,7 +106,7 @@ namespace WpfAppLib.Updater
         }
 
         /// <summary>
-        /// Remote path label text
+        /// Set or get the Remote path label text
         /// </summary>
         public string RemotePathLabelText
         {
@@ -125,7 +122,7 @@ namespace WpfAppLib.Updater
         }
 
         /// <summary>
-        /// Remote version label text
+        /// Set or get the Remote version label text
         /// </summary>
         public string RemoteVersionLabelText
         {
@@ -139,6 +136,20 @@ namespace WpfAppLib.Updater
             }
         }
 
+        /// <summary>
+        /// Set or get the Window title
+        /// </summary>
+        public string WindowTitleText
+        {
+            get
+            {
+                return viewModel.WindowTitleText;
+            }
+            set
+            {
+                viewModel.WindowTitleText = value;
+            }
+        }
 
         #endregion
 
@@ -155,27 +166,12 @@ namespace WpfAppLib.Updater
             InitializeComponent();
             viewModel = new UpdaterViewModel(updaterSettings);
             this.DataContext = viewModel;
-            
+
+            // Change the icon if teh window icon is transmitted            
             if (windowIcon != null)
             {
                 this.Icon = windowIcon;
             }
-            else
-            {
-                // Get the icon file from the resources
-                //var _windowIcon = new BitmapImage();
-                //using (Stream stream = Assembly.Load(this.Name).GetManifestResourceStream("WpfAppLib.Resources.info.png"))
-                //{
-                //    _windowIcon.BeginInit();
-                //    _windowIcon.StreamSource = stream;
-                //    _windowIcon.CacheOption = BitmapCacheOption.OnLoad;
-                //    _windowIcon.EndInit();
-                //    _windowIcon.Freeze();
-                //}
-
-            }
-
-
 
         }
 
