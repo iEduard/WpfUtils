@@ -1,0 +1,23 @@
+
+---------------------------------
+Version: 1.2.0.0
+Date: 22.05.2020
+Author: ESC
+
+-Added some additional features to show the purpose of the info dialog
+
+
+
+---------------------------------
+Version: 1.1.0.0
+Date: 21.05.2020
+Author: ESC
+
+-Added the History Text file
+
+---------------------------------
+Version: 1.0.0.0
+Date: 20.05.2020
+Author: ESC
+
+-Created the application

@@ -1,4 +1,4 @@
-﻿using CopyAndCompare;
+﻿using WpfAppLib.CopyAndCompare;
 using System;
 using System.ComponentModel;
 using System.Diagnostics;
@@ -13,29 +13,16 @@ namespace WpfAppLib.Updater
         #region Private variables
 
         // Private Variables
-        private bool isSelectedToDownload;
         private bool newestVersionInstalled;
         private updaterSettingsData settings;
         private string remoteVersion = "nul";
         private string localVersion = "nul";
-
+        private string downloadFileName = "";
         #endregion
 
 
         #region Public variables
 
-        /// <summary>
-        /// Select to update. If True this application will be updated from the Server.
-        /// </summary>
-        public bool IsSelectedToDownload
-        {
-            get { return isSelectedToDownload; }
-            set
-            {
-                isSelectedToDownload = value;
-                NotifyPropertyChanged("IsSelectedToDownload");
-            }
-        }
 
         /// <summary>
         /// Name of the Application to update / check for updates
@@ -82,7 +69,7 @@ namespace WpfAppLib.Updater
         /// </summary>
         public string LocalUrl
         {
-            get { return pathShortener(settings.appLocalPath); }
+            get { return PathShortener(settings.appLocalPath); }
             private set
             {
                 settings.appLocalPath = value;
@@ -109,11 +96,22 @@ namespace WpfAppLib.Updater
         /// </summary>
         public string RemoteUrl
         {
-            get { return pathShortener(settings.appServerPath); }
+            get { return PathShortener(settings.appServerPath); }
             private set
             {
                 settings.appServerPath = value;
                 NotifyPropertyChanged("RemoteUrl");
+            }
+        }
+
+        /// <summary>
+        /// Get the download file name
+        /// </summary>
+        public string DownloadFileName
+        {
+            get
+            {
+                return downloadFileName;
             }
         }
 
@@ -131,7 +129,6 @@ namespace WpfAppLib.Updater
 
 
             // Init the States
-            this.IsSelectedToDownload = false;
             this.NewestVersionInstalled = false;
 
         }
@@ -214,7 +211,6 @@ namespace WpfAppLib.Updater
                 }
             }
 
-            this.IsSelectedToDownload = retval;
             return retval;
         }
 
@@ -275,11 +271,6 @@ namespace WpfAppLib.Updater
 
             bool _retVal = false;
 
-            if (!this.IsSelectedToDownload)
-            {
-                return _retVal;
-            }
-
             Console.WriteLine("Performing Update for " + this.settings.appName + "...");
 
             // Check if the Destination Directory allready exists
@@ -293,9 +284,12 @@ namespace WpfAppLib.Updater
             // Da wir den Instally selber nicht so einfach ersetzen können da er ja bereits läuft müssen wir ihm einen besonderen Namen geben mit dem versionszusatz
             string _fileNameAddon = this.settings.appFileName.Replace(".exe", "") + "_" + FileVersionInfo.GetVersionInfo(this.settings.appServerPath + this.settings.appFileName).FileVersion + ".exe";
 
+            // Set the new file name
+            this.downloadFileName = this.settings.appLocalPath + _fileNameAddon;
+
             // perform the update of the execution file
             CopyMaster copyFiles = new CopyMaster();
-            _retVal = copyFiles.copyFile(this.settings.appServerPath + this.settings.appFileName, this.settings.appLocalPath + _fileNameAddon, true);
+            _retVal = copyFiles.copyFile(this.settings.appServerPath + this.settings.appFileName, this.downloadFileName, true);
 
             // Update the settings File
             // Check if the Destination Directory allready exists
@@ -323,7 +317,7 @@ namespace WpfAppLib.Updater
         /// </summary>
         /// <param name="path">the path to shorten</param>
         /// <returns>The shortened path</returns>
-        private string pathShortener(string path)
+        public string PathShortener(string path)
         {
             // Define some variables to use in this function
             bool _firstPartFound = false;

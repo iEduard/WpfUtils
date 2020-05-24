@@ -4,41 +4,9 @@ using System.Diagnostics;
 using System.IO;
 using System.Threading;
 
-namespace CopyAndCompare
+namespace WpfAppLib.CopyAndCompare
 {
     #region Events
-
-    public class CompareStateChangedEventArgs : EventArgs
-    {
-        /// <summary>
-        /// Transfer rate in Mb/s
-        /// </summary>
-        public int compareRate { get; set; }
-
-        /// <summary>
-        /// Current File to copy
-        /// </summary>
-        public string currentFileOrDirectory { get; set; }
-
-        /// <summary>
-        /// Overall state for the complete copy requested
-        /// </summary>
-        public string overallStatePercentage { get; set; }
-
-        /// <summary>
-        /// Source Dir for the compare operation
-        /// </summary>
-        public string sourceDir { get; set; }
-
-        /// <summary>
-        /// Destionation Dir for the compare operation
-        /// </summary>
-        public string destinationDir { get; set; }
-
-    }
-
-    public delegate void CompareStateChangedEventHandler(object sender, CompareStateChangedEventArgs e);
-
 
     public class CompareFinishedEventArgs : EventArgs
     {
@@ -115,13 +83,11 @@ namespace CopyAndCompare
         #region Threads
 
         private Thread compareDirectoryThread;
-        private Thread compareFileThread;
 
         #endregion
 
         #region Events
 
-        public event CompareStateChangedEventHandler CompareStateChanged;
         public event CompareFinishedEventHandler CompareFinished;
 
         #endregion
@@ -132,11 +98,6 @@ namespace CopyAndCompare
         /// 
         /// </summary>
         private CompareFinishedEventArgs finishedEventArgs = new CompareFinishedEventArgs();
-
-        /// <summary>
-        /// 
-        /// </summary>
-        private CompareStateChangedEventArgs changedEventArgs = new CompareStateChangedEventArgs();
 
         #endregion
 
@@ -347,95 +308,6 @@ namespace CopyAndCompare
 
         #endregion
 
-        #region File compare
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="source"></param>
-        /// <param name="destination"></param>
-        /*        public void CompareFileAsynch(string source, string destination)
-                {
-                    if (CheckThreadIsAlreadyRunning())
-                    {
-                        return;
-                    }
-
-                    this.sourceFile = source;
-                    this.destinationFile = destination;
-
-                    // Check if Data is valid
-                    if (File.Exists(this.sourceFile))
-                    {
-                        // Start the Copying thread
-                        copyFileThread = new Thread(CopyFileThread);
-                        copyFileThread.Start();
-
-                    }
-                    else
-                    {
-
-                        finishedEventArgs.allFilesCopyedAndNoError = false;
-                        finishedEventArgs.notCopyedFiles = new List<string>();
-                        finishedEventArgs.notCopyedFiles.Add("Source Directory not found. No wile was copyed");
-                        finishedEventArgs.timeElapsed = 0;
-
-                        // Hit the event that we have finished without copying anything
-                        CopyFinished.Invoke(this, finishedEventArgs);
-                    }
-
-                }
-
-                /// <summary>
-                /// 
-                /// </summary>
-                private void CompareFileThread()
-                {
-                    // Start measuring the leapsed time
-                    Stopwatch _stopwatch = new Stopwatch();
-                    _stopwatch.Start();
-
-                    finishedEventArgs.allFilesCopyedAndNoError = true;  // Preset the Args with true. Will be set to false if an error occured
-                    copyFile(this.sourceFile, this.destinationFile, true);
-
-                    // Safe the elapsed Time to the event argument
-                    _stopwatch.Stop();
-                    finishedEventArgs.timeElapsed = _stopwatch.ElapsedMilliseconds;
-                    CopyFinished.Invoke(this, finishedEventArgs);   // Hit the event that we have finished without copying anything
-
-                }
-
-                /// <summary>
-                /// 
-                /// </summary>
-                /// <param name="sourcefileName"></param>
-                /// <param name="destinationFileName"></param>
-                /// <param name="overwrite"></param>
-                public bool compareFile(string sourcefileName, string destinationFileName, bool overwrite)
-                {
-                    bool _retVal = false;
-
-                    try
-                    {
-                        File.Copy(sourcefileName, destinationFileName, true);
-                        _retVal = true;
-                    }
-                    catch (Exception err)
-                    {
-                        Console.WriteLine("Bei dem kopieren ist ein fehler aufgetreten.");
-                        Console.WriteLine(err);
-
-                        finishedEventArgs.allFilesCopyedAndNoError = false;
-                        finishedEventArgs.notCopyedFiles = new List<string>();
-                        finishedEventArgs.notCopyedFiles.Add("File: " + sourcefileName + " was not copyed");
-                    }
-
-                    return _retVal;
-                }
-
-            */
-        #endregion
-
         /// <summary>
         /// 
         /// </summary>
@@ -447,14 +319,6 @@ namespace CopyAndCompare
             if (compareDirectoryThread != null)
             {
                 if (compareDirectoryThread.IsAlive)
-                {
-                    _retVal = true;
-                }
-            }
-
-            if (compareFileThread != null)
-            {
-                if (compareFileThread.IsAlive)
                 {
                     _retVal = true;
                 }

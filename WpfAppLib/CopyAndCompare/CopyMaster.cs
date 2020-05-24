@@ -5,7 +5,7 @@ using System.IO;
 using System.Text;
 using System.Threading;
 
-namespace CopyAndCompare
+namespace WpfAppLib.CopyAndCompare
 {
     #region Events
 
@@ -173,11 +173,6 @@ namespace CopyAndCompare
         /// Thread for the file copy work
         /// </summary>
         private Thread copyFileThread;
-
-        /// <summary>
-        /// Currently not used.
-        /// </summary>
-        private bool stopCopyFileThread = false;
 
         /// <summary>
         /// 
@@ -469,8 +464,6 @@ namespace CopyAndCompare
         /// </summary>
         private void CopyFileThread()
         {
-            // Reset the stop bit
-            stopCopyFileThread = false;
 
             // Start measuring the leapsed time
             Stopwatch _stopwatch = new Stopwatch();

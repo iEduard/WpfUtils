@@ -153,6 +153,24 @@ namespace WpfAppLib.Updater
 
         #endregion
 
+
+        /// <summary>
+        /// Update object with settings. Used if the running application is the only application to be updated without an settings file
+        /// </summary>
+        /// <param name="position">position where the pop up window should be displayed</param>
+        /// <param name="updaterSettings"></param>
+        public UpdaterView(Point position, updaterSettingsData updaterSettings)
+        {
+
+            this.windowStartPosistion = position;
+
+            InitializeComponent();
+            viewModel = new UpdaterViewModel(updaterSettings);
+            this.DataContext = viewModel;
+
+
+        }
+
         /// <summary>
         /// Update object with settings. Used if the running application is the only application to be updated without an settings file
         /// </summary>

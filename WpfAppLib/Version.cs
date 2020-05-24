@@ -39,7 +39,7 @@ namespace WpfAppLib
                     _history.Append(result);
                 }
             }
-            catch (Exception err)
+            catch
             {
                 _history = new StringBuilder();
             }

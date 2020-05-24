@@ -1,7 +1,18 @@
 ﻿********************************************************************************
+Version 2.0		24.05.2020
+
+-Almoust all new..
+-New Single Updater dialog
+-Added icon support
+-Added text support fo the dialogs to be multi lingual
+	-All the textes can now be changed. (Except for the status bar text)
+-Added the copy and compare classes
+-Added feedback after download to the statusbar
+
+********************************************************************************
 Version 1.6		29.04.2020
 
--Updated the updater to be allow construtors with settings directly delivered
+-Updated the updater to allow construtors with settings directly delivered
 
 -Removed depricated code linked to old projects
 

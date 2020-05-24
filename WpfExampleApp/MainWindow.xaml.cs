@@ -5,6 +5,8 @@ using WpfAppLib.Infodialog;
 using WpfAppLib.Updater;
 using WpfAppLib.MultiUpdater;
 using System.Windows.Media.Imaging;
+using System.Text;
+using System;
 
 namespace WpfExampleApp
 {
@@ -53,7 +55,33 @@ namespace WpfExampleApp
             }
 
 
-            InfoDialog _myInfoDialo = new InfoDialog(new Point(), "1.0.0.0", "Created", "Company", "Eduard Schmidt", "esc@someProvider.org", null);
+            // Get the Information text for the dialog
+            StringBuilder _infoText = new StringBuilder();
+
+            // Add the debendency information
+            _infoText.Append("********************************************************************************\n");
+            _infoText.Append("WpfAppLib.dll version: " + WpfAppLib.Version.GetVersion() + "\n");
+            _infoText.Append("********************************************************************************\n");
+
+            try
+            {
+
+
+                _infoText.Append("History:\n\n");
+                using (Stream stream = Assembly.GetExecutingAssembly().GetManifestResourceStream("WpfExampleApp.Resources.History.txt"))
+                using (StreamReader reader = new StreamReader(stream))
+                {
+                    string result = reader.ReadToEnd();
+                    _infoText.Append(result);
+                }
+            }
+            catch (Exception err)
+            {
+                Console.WriteLine("Error reading Versio History log. :: " + err.Message);
+            }
+
+
+            InfoDialog _myInfoDialo = new InfoDialog(new Point(), Assembly.GetExecutingAssembly().GetName().Version.ToString(), _infoText.ToString(), "Company", "Eduard Schmidt", "esc@someProvider.org", null);
             _myInfoDialo.Show();
         }
 

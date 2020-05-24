@@ -104,5 +104,8 @@
   <ItemGroup>
     <EmbeddedResource Include="Resources\studie.png" />
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\History.txt" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

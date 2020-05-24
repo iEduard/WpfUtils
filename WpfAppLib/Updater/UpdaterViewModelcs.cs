@@ -19,7 +19,7 @@ namespace WpfAppLib.Updater
 
         // UI Text fields
         private string checkUpdatesButtonText = "Check for updates";
-        private string updateButtonText = "Update";
+        private string updateButtonText = "Download";
         private string cancelButtonText = "Cancel";
 
         private string localPathLabelText = "Local path:";

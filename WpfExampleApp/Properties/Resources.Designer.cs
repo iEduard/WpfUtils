@@ -61,6 +61,37 @@ namespace WpfExampleApp.Properties {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die 
+        ///---------------------------------
+        ///Version: 1.2.0.0
+        ///Date: 22.05.2020
+        ///Author: ESC
+        ///
+        ///-Added some additional features to show the purpose of the info dialog
+        ///
+        ///
+        ///
+        ///---------------------------------
+        ///Version: 1.1.0.0
+        ///Date: 21.05.2020
+        ///Author: ESC
+        ///
+        ///-Added the History Text file
+        ///
+        ///---------------------------------
+        ///Version: 1.0.0.0
+        ///Date: 20.05.2020
+        ///Author: ESC
+        ///
+        ///-Created the application ähnelt.
+        /// </summary>
+        internal static string History {
+            get {
+                return ResourceManager.GetString("History", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap studie {

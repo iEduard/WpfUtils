@@ -1,4 +1,4 @@
-﻿using CopyAndCompare;
+﻿using WpfAppLib.CopyAndCompare;
 using System;
 using System.ComponentModel;
 using System.Diagnostics;
@@ -15,7 +15,6 @@ namespace WpfAppLib.MultiUpdater
         // Private Variables
         private bool isSelectedToDownload;
         private bool newestVersionInstalled;
-        private int downloadState = 0;
         private updaterSettingsData settings;
         private string remoteVersion;
         private string localVersion;
@@ -134,7 +133,6 @@ namespace WpfAppLib.MultiUpdater
             // Init the States
             this.IsSelectedToDownload = false;
             this.NewestVersionInstalled = false;
-            this.downloadState = 0;
 
         }
 

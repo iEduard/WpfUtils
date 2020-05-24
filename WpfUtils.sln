@@ -7,8 +7,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfExampleApp", "WpfExample
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfAppLib", "WpfAppLib\WpfAppLib.csproj", "{26C26886-CAB5-4CE5-B43C-DB6C9E3F548C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CopyAndCompare", "CopyAndCompare\CopyAndCompare.csproj", "{346122E5-CEB3-49DF-B222-FEB3843147AD}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,10 +21,6 @@ Global
 		{26C26886-CAB5-4CE5-B43C-DB6C9E3F548C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{26C26886-CAB5-4CE5-B43C-DB6C9E3F548C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{26C26886-CAB5-4CE5-B43C-DB6C9E3F548C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{346122E5-CEB3-49DF-B222-FEB3843147AD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{346122E5-CEB3-49DF-B222-FEB3843147AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{346122E5-CEB3-49DF-B222-FEB3843147AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{346122E5-CEB3-49DF-B222-FEB3843147AD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

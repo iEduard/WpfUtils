@@ -44,7 +44,6 @@ namespace WpfAppLib.Updater
 
         private UpdateStateChangedEventArgs updateStateChangedEventArgs = new UpdateStateChangedEventArgs();
 
-        private string OwnApplicationName = "";
 
         #endregion
 
@@ -162,9 +161,8 @@ namespace WpfAppLib.Updater
         /// </summary>
         private void getUpdate()
         {
-                 
-            this.UpdatableObject.performUpdate();          
-
+            this.UpdatableObject.performUpdate();
+            UpdateStateChanged.Invoke(this, new UpdateStateChangedEventArgs { stateMsg = "Download done. Saved under: "+ UpdatableObject.PathShortener(UpdatableObject.DownloadFileName), state = 0 });
         }
 
         #endregion
